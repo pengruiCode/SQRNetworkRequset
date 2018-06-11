@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A2D668F20CE101700C986E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D668E20CE101700C986E3 /* AppDelegate.m */; };
-		9A2D669220CE101700C986E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D669120CE101700C986E3 /* ViewController.m */; };
-		9A2D669520CE101700C986E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D669320CE101700C986E3 /* Main.storyboard */; };
-		9A2D669720CE101A00C986E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D669620CE101A00C986E3 /* Assets.xcassets */; };
-		9A2D669A20CE101A00C986E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D669820CE101A00C986E3 /* LaunchScreen.storyboard */; };
-		9A2D669D20CE101A00C986E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D669C20CE101A00C986E3 /* main.m */; };
 		9A2D66A720CE101A00C986E3 /* SQRNetworkRequsetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66A620CE101A00C986E3 /* SQRNetworkRequsetTests.m */; };
 		9A2D66B220CE101A00C986E3 /* SQRNetworkRequsetUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66B120CE101A00C986E3 /* SQRNetworkRequsetUITests.m */; };
+		9A2D66CF20CE109C00C986E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66C420CE109C00C986E3 /* AppDelegate.m */; };
+		9A2D66D020CE109C00C986E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D66C520CE109C00C986E3 /* Assets.xcassets */; };
+		9A2D66D120CE109C00C986E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D66C620CE109C00C986E3 /* LaunchScreen.storyboard */; };
+		9A2D66D220CE109C00C986E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D66C820CE109C00C986E3 /* Main.storyboard */; };
+		9A2D66D320CE109C00C986E3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A2D66CA20CE109C00C986E3 /* Info.plist */; };
+		9A2D66D420CE109C00C986E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66CB20CE109C00C986E3 /* main.m */; };
+		9A2D66D520CE109C00C986E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66CD20CE109C00C986E3 /* ViewController.m */; };
+		9A2D66D920CE10A900C986E3 /* SQRNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,21 +38,23 @@
 
 /* Begin PBXFileReference section */
 		9A2D668A20CE101700C986E3 /* SQRNetworkRequset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQRNetworkRequset.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A2D668D20CE101700C986E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		9A2D668E20CE101700C986E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9A2D669020CE101700C986E3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9A2D669120CE101700C986E3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9A2D669420CE101700C986E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9A2D669620CE101A00C986E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9A2D669920CE101A00C986E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9A2D669B20CE101A00C986E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A2D669C20CE101A00C986E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A2D66A220CE101A00C986E3 /* SQRNetworkRequsetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SQRNetworkRequsetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2D66A620CE101A00C986E3 /* SQRNetworkRequsetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequsetTests.m; sourceTree = "<group>"; };
 		9A2D66A820CE101A00C986E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A2D66AD20CE101A00C986E3 /* SQRNetworkRequsetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SQRNetworkRequsetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2D66B120CE101A00C986E3 /* SQRNetworkRequsetUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequsetUITests.m; sourceTree = "<group>"; };
 		9A2D66B320CE101A00C986E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A2D66C320CE109C00C986E3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9A2D66C420CE109C00C986E3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9A2D66C520CE109C00C986E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9A2D66C720CE109C00C986E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9A2D66C920CE109C00C986E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9A2D66CA20CE109C00C986E3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A2D66CB20CE109C00C986E3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9A2D66CC20CE109C00C986E3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9A2D66CD20CE109C00C986E3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9A2D66D720CE10A900C986E3 /* SQRNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQRNetworkRequest.h; sourceTree = "<group>"; };
+		9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +85,7 @@
 		9A2D668120CE101700C986E3 = {
 			isa = PBXGroup;
 			children = (
-				9A2D668C20CE101700C986E3 /* SQRNetworkRequset */,
+				9A2D66C220CE109C00C986E3 /* SQRNetworkRequsetExample */,
 				9A2D66A520CE101A00C986E3 /* SQRNetworkRequsetTests */,
 				9A2D66B020CE101A00C986E3 /* SQRNetworkRequsetUITests */,
 				9A2D668B20CE101700C986E3 /* Products */,
@@ -96,22 +100,6 @@
 				9A2D66AD20CE101A00C986E3 /* SQRNetworkRequsetUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9A2D668C20CE101700C986E3 /* SQRNetworkRequset */ = {
-			isa = PBXGroup;
-			children = (
-				9A2D668D20CE101700C986E3 /* AppDelegate.h */,
-				9A2D668E20CE101700C986E3 /* AppDelegate.m */,
-				9A2D669020CE101700C986E3 /* ViewController.h */,
-				9A2D669120CE101700C986E3 /* ViewController.m */,
-				9A2D669320CE101700C986E3 /* Main.storyboard */,
-				9A2D669620CE101A00C986E3 /* Assets.xcassets */,
-				9A2D669820CE101A00C986E3 /* LaunchScreen.storyboard */,
-				9A2D669B20CE101A00C986E3 /* Info.plist */,
-				9A2D669C20CE101A00C986E3 /* main.m */,
-			);
-			path = SQRNetworkRequset;
 			sourceTree = "<group>";
 		};
 		9A2D66A520CE101A00C986E3 /* SQRNetworkRequsetTests */ = {
@@ -131,6 +119,32 @@
 			);
 			path = SQRNetworkRequsetUITests;
 			sourceTree = "<group>";
+		};
+		9A2D66C220CE109C00C986E3 /* SQRNetworkRequsetExample */ = {
+			isa = PBXGroup;
+			children = (
+				9A2D66D620CE10A900C986E3 /* SQRNetworkRequset */,
+				9A2D66C320CE109C00C986E3 /* AppDelegate.h */,
+				9A2D66C420CE109C00C986E3 /* AppDelegate.m */,
+				9A2D66C520CE109C00C986E3 /* Assets.xcassets */,
+				9A2D66C620CE109C00C986E3 /* LaunchScreen.storyboard */,
+				9A2D66C820CE109C00C986E3 /* Main.storyboard */,
+				9A2D66CA20CE109C00C986E3 /* Info.plist */,
+				9A2D66CB20CE109C00C986E3 /* main.m */,
+				9A2D66CC20CE109C00C986E3 /* ViewController.h */,
+				9A2D66CD20CE109C00C986E3 /* ViewController.m */,
+			);
+			path = SQRNetworkRequsetExample;
+			sourceTree = "<group>";
+		};
+		9A2D66D620CE10A900C986E3 /* SQRNetworkRequset */ = {
+			isa = PBXGroup;
+			children = (
+				9A2D66D720CE10A900C986E3 /* SQRNetworkRequest.h */,
+				9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */,
+			);
+			path = SQRNetworkRequset;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -235,9 +249,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2D669A20CE101A00C986E3 /* LaunchScreen.storyboard in Resources */,
-				9A2D669720CE101A00C986E3 /* Assets.xcassets in Resources */,
-				9A2D669520CE101700C986E3 /* Main.storyboard in Resources */,
+				9A2D66D320CE109C00C986E3 /* Info.plist in Resources */,
+				9A2D66D220CE109C00C986E3 /* Main.storyboard in Resources */,
+				9A2D66D020CE109C00C986E3 /* Assets.xcassets in Resources */,
+				9A2D66D120CE109C00C986E3 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +277,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2D669220CE101700C986E3 /* ViewController.m in Sources */,
-				9A2D669D20CE101A00C986E3 /* main.m in Sources */,
-				9A2D668F20CE101700C986E3 /* AppDelegate.m in Sources */,
+				9A2D66CF20CE109C00C986E3 /* AppDelegate.m in Sources */,
+				9A2D66D420CE109C00C986E3 /* main.m in Sources */,
+				9A2D66D520CE109C00C986E3 /* ViewController.m in Sources */,
+				9A2D66D920CE10A900C986E3 /* SQRNetworkRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,20 +316,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9A2D669320CE101700C986E3 /* Main.storyboard */ = {
+		9A2D66C620CE109C00C986E3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9A2D669420CE101700C986E3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9A2D669820CE101A00C986E3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9A2D669920CE101A00C986E3 /* Base */,
+				9A2D66C720CE109C00C986E3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9A2D66C820CE109C00C986E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A2D66C920CE109C00C986E3 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -434,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M7JT4ZMJ42;
 				INFOPLIST_FILE = SQRNetworkRequset/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -450,6 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M7JT4ZMJ42;
 				INFOPLIST_FILE = SQRNetworkRequset/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
