@@ -71,7 +71,6 @@ static AFNetworkReachabilityStatus  networkStatus;
             {
                 // 没有网络
                 networkStatus = AFNetworkReachabilityStatusNotReachable;
-                DEF_Toast(@"没有网络，请切换网络后重试");
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
