@@ -21,4 +21,8 @@ Pod::Spec.new do |s|
      ss.dependency "AFNetworking"
   end
 
+  s.subspec "SQRBaseDefineWithFunction" do |ss|
+     ss.dependency "SQRBaseDefineWithFunction"
+  end
+
  end
