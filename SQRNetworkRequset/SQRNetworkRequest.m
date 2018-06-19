@@ -9,7 +9,7 @@
 #import "SQRNetworkRequest.h"
 #import "YYCache.h"
 #import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
-@class SQRBaseDefine;
+
 //无网络返回错误状态
 #define NOT_NETWORK_ERROR [NSError errorWithDomain:@"com.shequren.SQRNetworking.ErrorDomain" code:-999 userInfo:@{NSLocalizedDescriptionKey:@"无网络"}]
 
