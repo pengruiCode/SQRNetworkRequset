@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "SQRNetworkRequest.h"
-//#import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
+#import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
 
 @interface ViewController ()
 
@@ -61,7 +61,7 @@
                                                   } cache:^(id responseObject) {
                                                       
                                                   } failure:^(NSError *error, NSURLSessionDataTask *task) {
-//                                                      DEF_JAVAERROR_TOAST(error, task, @"发送失败");
+                                                      DEF_JAVAERROR_TOAST(error, task, @"发送失败");
                                                   }];
 }
 
