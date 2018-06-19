@@ -8,8 +8,33 @@
 
 #import "SQRNetworkRequest.h"
 #import "YYCache.h"
+#import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
 
+//无网络返回错误状态
 #define NOT_NETWORK_ERROR [NSError errorWithDomain:@"com.shequren.SQRNetworking.ErrorDomain" code:-999 userInfo:@{NSLocalizedDescriptionKey:@"无网络"}]
+
+//请求成功处理数据并返回
+#define REQUEST_SUCCEED_OPERATION_BLCOK(success)\
+\
+NSString *responseJson = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];\
+NSDictionary *dictObj = [SQRCommonFunction JsonToDictionary:responseJson];\
+if (success)success(dictObj);\
+[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
+NSLog(@"成功返回 --- URL ： %@ \n %@",urlString,dictObj);
+
+//请求成功判断缓存方式并缓存
+#define SAVECACHEWITH_CACHEWAY_MYCHAHE_KEY(cacheWay,myCache,cacheKey)\
+dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{\
+    if (cacheWay != IgnoringLocalCacheData) {\
+        [myCache setObject:dictObj forKey:cacheKey];\
+    }\
+});
+
+//请求失败打印错误原因并返回
+#define REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task)\
+if (fail)fail(error,task);\
+[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
+NSLog(@"失败返回 --- URL ： %@ \n 错误码 = %@",urlString,error);
 
 
 static AFNetworkReachabilityStatus  networkStatus;
@@ -35,8 +60,6 @@ static AFNetworkReachabilityStatus  networkStatus;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [AFHTTPSessionManager manager];
-        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
                                                                                   @"text/html",
                                                                                   @"text/json",
@@ -46,9 +69,10 @@ static AFNetworkReachabilityStatus  networkStatus;
                                                                                   @"image/*",
                                                                                   @"application/octet-stream",
                                                                                   @"application/zip"]];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.requestSerializer.timeoutInterval = 10;
     });
-    //    [self checkNetworkStatus];
     return manager;
 }
 
@@ -71,6 +95,7 @@ static AFNetworkReachabilityStatus  networkStatus;
             {
                 // 没有网络
                 networkStatus = AFNetworkReachabilityStatusNotReachable;
+                DEF_Toast(@"没有网络");
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
@@ -111,6 +136,8 @@ static AFNetworkReachabilityStatus  networkStatus;
     return mutStr;
 }
 
+
+
 - (void)requestWithUrl:(NSString *)urlString
             parameters:(id)parameters
                   type:(NetworkMethod)type
@@ -122,9 +149,11 @@ static AFNetworkReachabilityStatus  networkStatus;
     AFHTTPSessionManager *manager = [self sharedManager];
     
     if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
-        if (fail)fail(NOT_NETWORK_ERROR);
+        if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }
+    
+    NSLog(@"发起请求 --- URL ： %@",urlString);
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -173,20 +202,12 @@ static AFNetworkReachabilityStatus  networkStatus;
     switch (type) {
         case GET: {
             [manager GET:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    //将数据保存起来
-                    if (policy != IgnoringLocalCacheData) {
-                        [myCache setObject:responseObject forKey:cacheKey];
-                    }
-                });
-                
-                if (success)success(responseObject);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_SUCCEED_OPERATION_BLCOK(success);
+                SAVECACHEWITH_CACHEWAY_MYCHAHE_KEY(policy,myCache,cacheKey);
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                if (fail)fail(error);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
                 
             }];
         }
@@ -194,20 +215,13 @@ static AFNetworkReachabilityStatus  networkStatus;
             
         case POST: {
             [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    //将数据保存起来
-                    if (policy != IgnoringLocalCacheData) {
-                        [myCache setObject:responseObject forKey:cacheKey];
-                    }
-                });
                 
-                if (success)success(responseObject);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_SUCCEED_OPERATION_BLCOK(success);
+                SAVECACHEWITH_CACHEWAY_MYCHAHE_KEY(policy,myCache,cacheKey);
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                if (fail)fail(error);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
                 
             }];
         }
@@ -216,13 +230,11 @@ static AFNetworkReachabilityStatus  networkStatus;
         case PUT: {
             [manager PUT:urlString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                if (success)success(responseObject);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_SUCCEED_OPERATION_BLCOK(success);
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                if (fail)fail(error);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
                 
             }];
         }
@@ -231,13 +243,11 @@ static AFNetworkReachabilityStatus  networkStatus;
         case DELETE: {
             [manager DELETE:urlString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                if (success)success(responseObject);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_SUCCEED_OPERATION_BLCOK(success);
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                if (fail)fail(error);
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
                 
             }];
         }
@@ -306,7 +316,7 @@ static AFNetworkReachabilityStatus  networkStatus;
     AFHTTPSessionManager *manager = [self sharedManager];
     
     if (self.AFNetWorkStatus == AFNetworkReachabilityStatusNotReachable) {
-        if (fail)fail(NOT_NETWORK_ERROR);
+        if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -331,13 +341,11 @@ static AFNetworkReachabilityStatus  networkStatus;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        if (success)success(responseObject);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        REQUEST_SUCCEED_OPERATION_BLCOK(success);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if (fail)fail(error);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
         
     }];
 }
@@ -354,7 +362,7 @@ static AFNetworkReachabilityStatus  networkStatus;
     AFHTTPSessionManager *manager = [self sharedManager];
     
     if (self.AFNetWorkStatus == AFNetworkReachabilityStatusNotReachable) {
-        if (fail)fail(NOT_NETWORK_ERROR);
+        if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -368,13 +376,11 @@ static AFNetworkReachabilityStatus  networkStatus;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        if (success)success(responseObject);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        REQUEST_SUCCEED_OPERATION_BLCOK(success);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if (fail) fail(error);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
         
     }];
 }
@@ -401,7 +407,7 @@ static AFNetworkReachabilityStatus  networkStatus;
     AFURLSessionManager *manager = [self sharedDownloadManager];
     
     if (self.AFNetWorkStatus == AFNetworkReachabilityStatusNotReachable) {
-        if (fail)fail(NOT_NETWORK_ERROR);
+        if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];

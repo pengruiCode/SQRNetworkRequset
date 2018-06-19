@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, RequestCachePolicy) {
 
 typedef void (^NetRequestSuccessBlock)(id responseObject);                      //成功Block
 typedef void (^NetRequestCacheSuccessBlock)(id responseObject, BOOL isCache);   //缓存成功Block
-typedef void (^NetRequestFailedBlock)(NSError *error);                          //失败Block
+typedef void (^NetRequestFailedBlock)(NSError *error,NSURLSessionDataTask *task);//失败Block
 typedef void (^NetRequestProgressBlock)(float);                                 //进度Block
 typedef void (^NetResponseCache)(id responseObject);                            //缓存Block
 

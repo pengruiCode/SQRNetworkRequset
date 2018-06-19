@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16E1713D7A63581FFA24A0FE /* libPods-SQRNetworkRequset.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A9A5F5B8CA03F713ABE208C /* libPods-SQRNetworkRequset.a */; };
 		9A2D66A720CE101A00C986E3 /* SQRNetworkRequsetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66A620CE101A00C986E3 /* SQRNetworkRequsetTests.m */; };
 		9A2D66B220CE101A00C986E3 /* SQRNetworkRequsetUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66B120CE101A00C986E3 /* SQRNetworkRequsetUITests.m */; };
 		9A2D66CF20CE109C00C986E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66C420CE109C00C986E3 /* AppDelegate.m */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		052D2D0ADA7D66B2A017A647 /* Pods-SQRNetworkRequset.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SQRNetworkRequset.release.xcconfig"; path = "Pods/Target Support Files/Pods-SQRNetworkRequset/Pods-SQRNetworkRequset.release.xcconfig"; sourceTree = "<group>"; };
+		1D036C39827FF1D41F5F054C /* Pods-SQRNetworkRequset.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SQRNetworkRequset.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SQRNetworkRequset/Pods-SQRNetworkRequset.debug.xcconfig"; sourceTree = "<group>"; };
 		9A2D668A20CE101700C986E3 /* SQRNetworkRequset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQRNetworkRequset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2D66A220CE101A00C986E3 /* SQRNetworkRequsetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SQRNetworkRequsetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2D66A620CE101A00C986E3 /* SQRNetworkRequsetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequsetTests.m; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		9A2D66CD20CE109C00C986E3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9A2D66D720CE10A900C986E3 /* SQRNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQRNetworkRequest.h; sourceTree = "<group>"; };
 		9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequest.m; sourceTree = "<group>"; };
+		9A9A5F5B8CA03F713ABE208C /* libPods-SQRNetworkRequset.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SQRNetworkRequset.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E1713D7A63581FFA24A0FE /* libPods-SQRNetworkRequset.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +94,8 @@
 				9A2D66A520CE101A00C986E3 /* SQRNetworkRequsetTests */,
 				9A2D66B020CE101A00C986E3 /* SQRNetworkRequsetUITests */,
 				9A2D668B20CE101700C986E3 /* Products */,
+				EB625E4A3A57B24122CA6523 /* Pods */,
+				AEEA31BA75E59242301DCE5A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +153,23 @@
 			path = SQRNetworkRequset;
 			sourceTree = SOURCE_ROOT;
 		};
+		AEEA31BA75E59242301DCE5A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A9A5F5B8CA03F713ABE208C /* libPods-SQRNetworkRequset.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB625E4A3A57B24122CA6523 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D036C39827FF1D41F5F054C /* Pods-SQRNetworkRequset.debug.xcconfig */,
+				052D2D0ADA7D66B2A017A647 /* Pods-SQRNetworkRequset.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,6 +177,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A2D66B620CE101A00C986E3 /* Build configuration list for PBXNativeTarget "SQRNetworkRequset" */;
 			buildPhases = (
+				A61F7A07B97FE318ECAE152C /* [CP] Check Pods Manifest.lock */,
 				9A2D668620CE101700C986E3 /* Sources */,
 				9A2D668720CE101700C986E3 /* Frameworks */,
 				9A2D668820CE101700C986E3 /* Resources */,
@@ -271,6 +296,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A61F7A07B97FE318ECAE152C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SQRNetworkRequset-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A2D668620CE101700C986E3 /* Sources */ = {
@@ -447,11 +493,12 @@
 		};
 		9A2D66B720CE101A00C986E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D036C39827FF1D41F5F054C /* Pods-SQRNetworkRequset.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M7JT4ZMJ42;
-				INFOPLIST_FILE = SQRNetworkRequset/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SQRNetworkRequsetExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,11 +511,12 @@
 		};
 		9A2D66B820CE101A00C986E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 052D2D0ADA7D66B2A017A647 /* Pods-SQRNetworkRequset.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M7JT4ZMJ42;
-				INFOPLIST_FILE = SQRNetworkRequset/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SQRNetworkRequsetExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
