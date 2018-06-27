@@ -13,7 +13,8 @@ typedef NS_ENUM(NSUInteger, NetworkMethod) {
     GET = 0,
     POST,
     PUT,
-    DELETE
+    DELETE,
+    PATCH
 };
 
 typedef NS_ENUM(NSUInteger, RequestCachePolicy) {
@@ -87,6 +88,48 @@ typedef void (^NetResponseCache)(id responseObject);                            
          parameters:(id)parameters
             success:(NetRequestSuccessBlock)success
                fail:(NetRequestFailedBlock)fail;
+
+/**
+ *  Put形式提交数据
+ *
+ *  @param urlString  Url
+ *  @param parameters 参数
+ *  @param success    成功Block
+ *  @param fail       失败Block
+ */
+- (void)putWithUrl:(NSString *)urlString
+        parameters:(id)parameters
+           success:(NetRequestSuccessBlock)success
+              fail:(NetRequestFailedBlock)fail;
+
+/**
+ *  Delete形式提交数据
+ *
+ *  @param urlString  Url
+ *  @param parameters 参数
+ *  @param success    成功Block
+ *  @param fail       失败Block
+ */
+- (void)deleteWithUrl:(NSString *)urlString
+           parameters:(id)parameters
+              success:(NetRequestSuccessBlock)success
+                 fail:(NetRequestFailedBlock)fail;
+
+/**
+ *  Patch形式提交数据
+ *
+ *  @param urlString  Url
+ *  @param parameters 参数
+ *  @param success    成功Block
+ *  @param fail       失败Block
+ */
+- (void)patchWithUrl:(NSString *)urlString
+          parameters:(id)parameters
+             success:(NetRequestSuccessBlock)success
+                fail:(NetRequestFailedBlock)fail;
+
+
+
 
 /**
  *  Get形式提交数据 带缓存策略

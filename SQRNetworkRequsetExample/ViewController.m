@@ -50,19 +50,33 @@
 //                                                          DEF_JAVAERROR_TOAST(error, task, @"发送失败");
 //                                                      }];
     
-    [[SQRNetworkRequest sharedInstance] requestWithUrl:@"https://api.shequren.cn/ncs/blogs/508/favorite"
-                                            parameters:@{
-                                                         @"nickName":@"WalkingTimeIn",
-                                                         @"userId":@"18381"
-                                                         }
-                                                  type:PUT
+//    [[SQRNetworkRequest sharedInstance] requestWithUrl:@"https://api.shequren.cn/ncs/blogs/508/favorite"
+//                                            parameters:@{
+//                                                         @"nickName":@"WalkingTimeIn",
+//                                                         @"userId":@"18381"
+//                                                         }
+//                                                  type:PUT
+//                                           cachePolicy:IgnoringLocalCacheData success:^(id responseObject) {
+//
+//                                                  } cache:^(id responseObject) {
+//
+//                                                  } failure:^(NSError *error, NSURLSessionDataTask *task) {
+//                                                      DEF_JAVAERROR_TOAST(error, task, @"发送失败");
+//                                                  }];
+    
+    
+    [SQRDataSave saveDataInUserDefaultsWithData:@"AT-266-whQ5BWRUBrYmXe3ETwf4DJEK50ydbgAxCj3" dataEnum:SaveDataEnum_Token customKey:nil];
+    
+    [[SQRNetworkRequest sharedInstance] requestWithUrl:@"http://microservice.shoppingyizhan.com/shp/shops/login"
+                                            parameters:nil
+                                                  type:GET
                                            cachePolicy:IgnoringLocalCacheData success:^(id responseObject) {
-                                               
-                                                  } cache:^(id responseObject) {
-                                                      
-                                                  } failure:^(NSError *error, NSURLSessionDataTask *task) {
-                                                      DEF_JAVAERROR_TOAST(error, task, @"发送失败");
-                                                  }];
+
+                                           } cache:^(id responseObject) {
+
+                                           } failure:^(NSError *error, NSURLSessionDataTask *task) {
+                                               DEF_JAVAERROR_TOAST(error, task, @"发送失败");
+                                           }];
 }
 
 @end

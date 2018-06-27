@@ -9,6 +9,7 @@
 #import "SQRNetworkRequest.h"
 #import "YYCache.h"
 #import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
+#import <SQRBaseDefineWithFunction/SQRDataSave.h>
 
 //无网络返回错误状态
 #define NOT_NETWORK_ERROR [NSError errorWithDomain:@"com.shequren.SQRNetworking.ErrorDomain" code:-999 userInfo:@{NSLocalizedDescriptionKey:@"无网络"}]
@@ -34,7 +35,8 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
 #define REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task)\
 if (fail)fail(error,task);\
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
-NSLog(@"失败返回 --- URL ： %@ \n 错误码 = %@",urlString,error);
+NSHTTPURLResponse * responses = (NSHTTPURLResponse *)task.response;\
+NSLog(@"失败返回 --- URL ： %@ \n ---错误码 = %ld  \n ---详细信息 : %@",urlString,responses.statusCode,error);
 
 
 static AFNetworkReachabilityStatus  networkStatus;
@@ -148,6 +150,10 @@ static AFNetworkReachabilityStatus  networkStatus;
 {
     AFHTTPSessionManager *manager = [self sharedManager];
     
+    if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]) {
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer%@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]] forHTTPHeaderField:@"Authorization"];
+    }
+    
     if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
         if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
@@ -201,7 +207,9 @@ static AFNetworkReachabilityStatus  networkStatus;
     
     switch (type) {
         case GET: {
+            
             [manager GET:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
                 REQUEST_SUCCEED_OPERATION_BLCOK(success);
                 SAVECACHEWITH_CACHEWAY_MYCHAHE_KEY(policy,myCache,cacheKey);
                 
@@ -214,6 +222,7 @@ static AFNetworkReachabilityStatus  networkStatus;
             break;
             
         case POST: {
+            
             [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
                 REQUEST_SUCCEED_OPERATION_BLCOK(success);
@@ -253,6 +262,19 @@ static AFNetworkReachabilityStatus  networkStatus;
         }
             break;
             
+        case PATCH: {
+            [manager PATCH:urlString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
+                REQUEST_SUCCEED_OPERATION_BLCOK(success);
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
+                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
+                
+            }];
+        }
+            break;
+            
         default:
             break;
     }
@@ -275,20 +297,31 @@ static AFNetworkReachabilityStatus  networkStatus;
     [self requestWithUrl:urlString parameters:parameters type:POST cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
 }
 
+- (void)putWithUrl:(NSString *)urlString
+        parameters:(id)parameters
+           success:(NetRequestSuccessBlock)success
+              fail:(NetRequestFailedBlock)fail
+{
+    [self requestWithUrl:urlString parameters:parameters type:PUT cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
+}
 
-- (void)postWithUrl:(NSString *)urlString
+
+- (void)deleteWithUrl:(NSString *)urlString
          parameters:(id)parameters
-        cachePolicy:(RequestCachePolicy)policy
-            success:(NetRequestCacheSuccessBlock)success
+            success:(NetRequestSuccessBlock)success
                fail:(NetRequestFailedBlock)fail
 {
-    NSLog(@"请求参数：---%@",parameters);
-    [self requestWithUrl:urlString parameters:parameters type:POST cachePolicy:policy success:^(id responseObject) {
-        !success ?: success(responseObject, NO);
-    } cache:^(id responseObject) {
-        !success ?: success(responseObject, YES);
-    } failure:fail];
+    [self requestWithUrl:urlString parameters:parameters type:DELETE cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
 }
+
+- (void)patchWithUrl:(NSString *)urlString
+           parameters:(id)parameters
+              success:(NetRequestSuccessBlock)success
+                 fail:(NetRequestFailedBlock)fail
+{
+    [self requestWithUrl:urlString parameters:parameters type:PATCH cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
+}
+
 
 
 - (void)getWithUrl:(NSString *)urlString
@@ -298,6 +331,21 @@ static AFNetworkReachabilityStatus  networkStatus;
               fail:(NetRequestFailedBlock)fail
 {
     [self requestWithUrl:urlString parameters:parameters type:GET cachePolicy:policy success:^(id responseObject) {
+        !success ?: success(responseObject, NO);
+    } cache:^(id responseObject) {
+        !success ?: success(responseObject, YES);
+    } failure:fail];
+}
+
+
+- (void)postWithUrl:(NSString *)urlString
+         parameters:(id)parameters
+        cachePolicy:(RequestCachePolicy)policy
+            success:(NetRequestCacheSuccessBlock)success
+               fail:(NetRequestFailedBlock)fail
+{
+    NSLog(@"请求参数：---%@",parameters);
+    [self requestWithUrl:urlString parameters:parameters type:POST cachePolicy:policy success:^(id responseObject) {
         !success ?: success(responseObject, NO);
     } cache:^(id responseObject) {
         !success ?: success(responseObject, YES);

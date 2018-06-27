@@ -11,6 +11,8 @@
 
 @interface SQRCommonFunction : NSObject
 
+@property (nonatomic,strong) UIView *popup;
+
 #pragma mark --- 字符相关
 
 + (instancetype)sharedInstance;
@@ -136,9 +138,20 @@
  *  @param stareColor   起始颜色
  *  @param endColor     结束颜色
  *  @param frame        view大小
- *
  */
 + (void)setGradualChangeBackgroundWithView:(UIView *)view isVertical:(BOOL)isVertical startColor:(UIColor *)stareColor endColor:(UIColor *)endColor frame:(CGRect)frame;
+
+
+/**
+ *  设置上传图片指示动画
+ *  @param title        提示文字
+ */
+- (void)setUploadImageAnimationWithTitle:(NSString *)title;
+
+/**
+ *  隐藏上传图片指示动画
+ */
+- (void)hide;
 
 
 #pragma mark --- 判断相关

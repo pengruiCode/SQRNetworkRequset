@@ -8,7 +8,7 @@
 
 #import "SQRCommonFunction.h"
 #import <CommonCrypto/CommonDigest.h>
-
+#import "SQRBaseDefine.h"
 
 #define DefaultThumImageHigth 90.0f
 #define DefaultPressImageHigth 960.0f
@@ -402,6 +402,51 @@ static id _instance;
     gradientLayer.frame = frame;
     [view.layer addSublayer:gradientLayer];
 }
+
+
+
+- (void)setUploadImageAnimationWithTitle:(NSString *)title {
+    UIView *tipView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, title.length * 14 + 12, 30)];
+    tipView.layer.cornerRadius = 5.f;
+    tipView.layer.masksToBounds = YES;
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:tipView.frame];
+    bgView.backgroundColor = [UIColor blackColor];
+    bgView.alpha = 0.5;
+    [tipView addSubview:bgView];
+    
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, title.length * 14, 30)];
+    tipLabel.text = title;
+    tipLabel.textColor = [UIColor whiteColor];
+    tipLabel.font = [UIFont systemFontOfSize:14.f];
+    [tipView addSubview:tipLabel];
+    
+    UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    testActivityIndicator.center = CGPointMake(15.f, 15.f);//只能设置中心，不能设置大小
+    [tipView addSubview:testActivityIndicator];
+    testActivityIndicator.color = [UIColor whiteColor]; // 改变圈圈的颜色为红色； iOS5引入
+    [testActivityIndicator startAnimating]; // 开始旋转
+    [testActivityIndicator setHidesWhenStopped:YES]; //当旋转结束时隐藏
+    
+    _popup = [[UIView alloc]initWithFrame:DEF_Window.bounds];
+    _popup.backgroundColor = DEF_RGBAColor(85, 85, 85, 0.4);
+    _popup.alpha = 0;
+    [_popup addSubview:tipView];
+    [DEF_Window addSubview:_popup];
+    tipView.center = _popup.center;
+    DEF_WeakSelf(_popup);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        weak_popup.alpha = 1;
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weak_popup setHidden:YES];
+    });
+}
+
+- (void)hide {
+    [_popup setHidden:YES];
+}
+
 
 #pragma mark --- 判断相关
 

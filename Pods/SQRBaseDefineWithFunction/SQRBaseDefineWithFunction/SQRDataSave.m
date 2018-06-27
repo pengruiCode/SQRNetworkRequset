@@ -24,7 +24,7 @@ static id _instance;
 }
 
 
-+ (void)seveDataInUserDefaultsWithData:(id)data dataEnum:(SaveDataNameEnum)dataEnum customKey:(NSString *)customKey {
++ (void)saveDataInUserDefaultsWithData:(id)data dataEnum:(SaveDataNameEnum)dataEnum customKey:(NSString *)customKey {
     if (data) {
         if (customKey) {
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:customKey];
@@ -56,7 +56,7 @@ static id _instance;
 
 
 
-+ (void)seveDataKeyedUnarchiverInUserDefaultsWithData:(id)data customKey:(NSString *)customKey {
++ (void)saveDataKeyedUnarchiverInUserDefaultsWithData:(id)data customKey:(NSString *)customKey {
     NSData *infoData = [NSKeyedArchiver archivedDataWithRootObject:data];
     [[NSUserDefaults standardUserDefaults] setObject:infoData forKey:customKey];
 }

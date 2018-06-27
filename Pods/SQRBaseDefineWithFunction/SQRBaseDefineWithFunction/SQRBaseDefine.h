@@ -59,16 +59,16 @@
 //最上层vc跳转（Push）
 #define DEF_PushToViewController(ViewController) \
 ViewController.hidesBottomBarWhenPushed = YES;\
-[[LKCommonTools topViewController].navigationController pushViewController:ViewController animated:YES]
+[[SQRCommonFunction topViewController].navigationController pushViewController:ViewController animated:YES]
 
 //最上层vc跳转（Present）
 #define DEF_PresentToViewController(ViewController) \
 ViewController.hidesBottomBarWhenPushed = YES;\
-[[LKCommonTools topViewController] presentViewController:ViewController animated:YES completion:nil]
+[[SQRCommonFunction topViewController] presentViewController:ViewController animated:YES completion:nil]
 
 //最上层vc返回
 #define DEF_PopToViewController \
-[[LKCommonTools topViewController].navigationController popViewControllerAnimated:YES]
+[[SQRCommonFunction topViewController].navigationController popViewControllerAnimated:YES]
 
 //设置原生tableviewcell的image大小
 #define DEF_CELL_IMAGEVIEW_SIZE(Width,Height)\
@@ -120,6 +120,19 @@ DEF_Window.userInteractionEnabled = YES;\
 
 //keyWindow
 #define DEF_Window [UIApplication sharedApplication].keyWindow
+
+
+#define DEF_BackView         for (UIView *item in DEF_Window.subviews) { \
+if(item.tag == 10000) \
+{ \
+[item removeFromSuperview]; \
+UIView * aView = [[UIView alloc] init]; \
+aView.frame = [UIScreen mainScreen].bounds; \
+aView.tag = 10000; \
+aView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3]; \
+[DEF_Window addSubview:aView]; \
+} \
+} \
 
 
 //设置加载提示框（第三方框架：MBProgressHUD）

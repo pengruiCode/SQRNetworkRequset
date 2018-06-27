@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, SaveDataNameEnum) {
-    //用户标识
-    SaveDataEnum_Session = 0,
+    //默认标识，在使用自定义key时使用
+    SaveDataEnum_Default = 0,
+    //用户标识(php)
+    SaveDataEnum_Session,
+    //用户标识(java)
+    SaveDataEnum_Token,
     //用户ID
     SaveDataEnum_UserId,
     //用户昵称
@@ -23,6 +27,10 @@ typedef NS_ENUM(NSUInteger, SaveDataNameEnum) {
     SaveDataEnum_UserType,
     //登录所用账号
     SaveDataEnum_LoginAccount,
+    //app当前版本号
+    SaveDataEnum_AppVersion,
+    //导航主色调(在跳转或设置rootvc的时候存在本地，因为三端主色调不一致)
+    SaveDataEnum_MasterColor,
     //极光推送注册ID
     SaveDataEnum_PushRegisterId,
     //当前位置 存入字典。结构为 dict:{@"lon":@"108.865644",@"lat":@"34.245529",@"city":@"029"}
@@ -39,7 +47,7 @@ typedef NS_ENUM(NSUInteger, SaveDataNameEnum) {
  *  @param   dataEnum   数据类型（将转化为数字作为key）
  *  @param   customKey  数据名称（在本类提供的枚举不能满足需求的时候使用自定义key来存取）
  */
-+ (void)seveDataInUserDefaultsWithData:(id)data dataEnum:(SaveDataNameEnum)dataEnum customKey:(NSString *)customKey;
++ (void)saveDataInUserDefaultsWithData:(id)data dataEnum:(SaveDataNameEnum)dataEnum customKey:(NSString *)customKey;
 
 /**
  *  从偏好设置获取本地保存的数据
@@ -65,7 +73,7 @@ typedef NS_ENUM(NSUInteger, SaveDataNameEnum) {
  *  @param   data       数据
  *  @param   customKey  数据名称（自定义key来存取）
  */
-+ (void)seveDataKeyedUnarchiverInUserDefaultsWithData:(id)data customKey:(NSString *)customKey;
++ (void)saveDataKeyedUnarchiverInUserDefaultsWithData:(id)data customKey:(NSString *)customKey;
 
 /**
  *  从偏好设置获取本地保存的数据
