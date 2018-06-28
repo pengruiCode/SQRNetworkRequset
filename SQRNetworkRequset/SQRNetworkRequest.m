@@ -462,6 +462,10 @@ static AFNetworkReachabilityStatus  networkStatus;
 {
     AFHTTPSessionManager *manager = [self sharedManager];
     
+    if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]) {
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer%@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]] forHTTPHeaderField:@"Authorization"];
+    }
+    
     if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
         if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
