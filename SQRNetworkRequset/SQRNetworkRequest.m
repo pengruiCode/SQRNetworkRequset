@@ -405,7 +405,11 @@ static AFNetworkReachabilityStatus  networkStatus;
     
     AFHTTPSessionManager *manager = [self sharedManager];
     
-    if (self.AFNetWorkStatus == AFNetworkReachabilityStatusNotReachable) {
+    if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]) {
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer%@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]] forHTTPHeaderField:@"Authorization"];
+    }
+    
+    if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
         if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }
@@ -418,7 +422,7 @@ static AFNetworkReachabilityStatus  networkStatus;
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
-            [formData appendPartWithFileData:[NSData data] name:@"uploadPic" fileName:fileName mimeType:@"image/jpg"];
+            [formData appendPartWithFileData:[NSData data] name:@"imgs" fileName:fileName mimeType:@"image/jpg"];
         }else{
             // 上传多张图片
             for(int i=0; i<imageArray.count; i++) {
@@ -458,7 +462,7 @@ static AFNetworkReachabilityStatus  networkStatus;
 {
     AFHTTPSessionManager *manager = [self sharedManager];
     
-    if (self.AFNetWorkStatus == AFNetworkReachabilityStatusNotReachable) {
+    if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
         if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }
@@ -503,7 +507,7 @@ static AFNetworkReachabilityStatus  networkStatus;
 {
     AFURLSessionManager *manager = [self sharedDownloadManager];
     
-    if (self.AFNetWorkStatus == AFNetworkReachabilityStatusNotReachable) {
+    if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
         if (fail)fail(NOT_NETWORK_ERROR,nil);
         return;
     }

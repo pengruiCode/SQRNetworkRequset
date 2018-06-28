@@ -104,4 +104,21 @@
 //                                           }];
 }
 
+
+
+- (IBAction)upload:(id)sender {
+    
+    [SQRDataSave saveDataInUserDefaultsWithData:@"AT-296-bAc4YlJndzhDcfqmRad6BLpjLlhd5mSVatn" dataEnum:SaveDataEnum_Token customKey:nil];
+    UIImage *image = [UIImage imageNamed:@"ic_search_white"];
+    [[SQRNetworkRequest sharedInstance] postUploadMultiImageWithUrl:@"http://microservice.shoppingyizhan.com/shp/upload" imageArray:@[image] parameters:nil progress:^(float progress) {
+        
+    } success:^(id responseObject) {
+        
+    } fail:^(NSError *error, NSURLSessionDataTask *task) {
+        DEF_JAVAERROR_TOAST(error, task, @"发送失败");
+    }];
+}
+
+
+
 @end
