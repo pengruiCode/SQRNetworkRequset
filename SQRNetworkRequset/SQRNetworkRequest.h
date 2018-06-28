@@ -1,7 +1,7 @@
 //
 //  SQRNetworkRequest.h
 //  SQRCommonToolsProject
-//
+//  
 //  Created by macMini on 2018/5/30.
 //  Copyright © 2018年 PR. All rights reserved.
 //
@@ -49,6 +49,7 @@ typedef void (^NetResponseCache)(id responseObject);                            
  @param urlString Url
  @param parameters 参数
  @param type 请求类型
+ @param isPhp 是否是php接口
  @param policy 缓存策略
  @param success 成功Block
  @param cache 缓存Block
@@ -57,6 +58,7 @@ typedef void (^NetResponseCache)(id responseObject);                            
 - (void)requestWithUrl:(NSString *)urlString
             parameters:(id)parameters
                   type:(NetworkMethod)type
+                 isPhp:(BOOL)isPhp
            cachePolicy:(RequestCachePolicy)policy
                success:(NetRequestSuccessBlock)success
                  cache:(NetResponseCache)cache
@@ -128,6 +130,19 @@ typedef void (^NetResponseCache)(id responseObject);                            
              success:(NetRequestSuccessBlock)success
                 fail:(NetRequestFailedBlock)fail;
 
+
+
+//PHP专用
+- (void)getPhpWithUrl:(NSString *)urlString
+           parameters:(id)parameters
+              success:(NetRequestSuccessBlock)success
+                 fail:(NetRequestFailedBlock)fail;
+
+//PHP专用
+- (void)postPhpWithUrl:(NSString *)urlString
+            parameters:(id)parameters
+               success:(NetRequestSuccessBlock)success
+                  fail:(NetRequestFailedBlock)fail;
 
 
 
