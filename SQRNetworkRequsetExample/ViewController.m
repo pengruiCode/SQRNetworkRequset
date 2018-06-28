@@ -68,7 +68,7 @@
                                                       @"content":@"Tttt",
                                                       @"headImg":@"http://wx.qlogo.cn/mmhead/qbvaL9taELu7yQPVA43aXa2AnJ12GVyfWyxne2OVzH2H9y7WCXIo0g/0",
                                                       @"nickName":@"WalkingTimeIn",
-                                                      @"userId":@"18381"
+                                                      @"userId":@"1838"
                                                       } success:^(id responseObject) {
 
                                                       } fail:^(NSError *error,NSURLSessionDataTask *task) {

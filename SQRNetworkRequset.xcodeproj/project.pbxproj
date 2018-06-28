@@ -18,6 +18,7 @@
 		9A2D66D420CE109C00C986E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66CB20CE109C00C986E3 /* main.m */; };
 		9A2D66D520CE109C00C986E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66CD20CE109C00C986E3 /* ViewController.m */; };
 		9A2D66D920CE10A900C986E3 /* SQRNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */; };
+		9A71D07E20E4B55F00E53BC8 /* HMFJSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A71D07C20E4B55C00E53BC8 /* HMFJSONResponseSerializerWithData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		9A2D66CD20CE109C00C986E3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9A2D66D720CE10A900C986E3 /* SQRNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQRNetworkRequest.h; sourceTree = "<group>"; };
 		9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequest.m; sourceTree = "<group>"; };
+		9A71D07C20E4B55C00E53BC8 /* HMFJSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMFJSONResponseSerializerWithData.m; sourceTree = "<group>"; };
+		9A71D07D20E4B55E00E53BC8 /* HMFJSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMFJSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		9A9A5F5B8CA03F713ABE208C /* libPods-SQRNetworkRequset.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SQRNetworkRequset.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -149,6 +152,8 @@
 			children = (
 				9A2D66D720CE10A900C986E3 /* SQRNetworkRequest.h */,
 				9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */,
+				9A71D07D20E4B55E00E53BC8 /* HMFJSONResponseSerializerWithData.h */,
+				9A71D07C20E4B55C00E53BC8 /* HMFJSONResponseSerializerWithData.m */,
 			);
 			path = SQRNetworkRequset;
 			sourceTree = SOURCE_ROOT;
@@ -325,6 +330,7 @@
 			files = (
 				9A2D66CF20CE109C00C986E3 /* AppDelegate.m in Sources */,
 				9A2D66D420CE109C00C986E3 /* main.m in Sources */,
+				9A71D07E20E4B55F00E53BC8 /* HMFJSONResponseSerializerWithData.m in Sources */,
 				9A2D66D520CE109C00C986E3 /* ViewController.m in Sources */,
 				9A2D66D920CE10A900C986E3 /* SQRNetworkRequest.m in Sources */,
 			);

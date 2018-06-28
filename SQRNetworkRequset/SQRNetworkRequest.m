@@ -8,6 +8,7 @@
 
 #import "SQRNetworkRequest.h"
 #import "YYCache.h"
+#import "HMFJSONResponseSerializerWithData.h"
 #import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
 #import <SQRBaseDefineWithFunction/SQRDataSave.h>
 
@@ -171,7 +172,7 @@ static AFNetworkReachabilityStatus  networkStatus;
         }
     }else{
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        manager.responseSerializer = [HMFJSONResponseSerializerWithData serializer];
         if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]) {
             [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer%@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]] forHTTPHeaderField:@"Authorization"];
         }
