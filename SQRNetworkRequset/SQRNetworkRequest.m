@@ -414,14 +414,21 @@ static AFNetworkReachabilityStatus  networkStatus;
     [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         if (imageArray.count == 0) {
-            [formData appendPartWithFileData:[NSData data] name:@"imgs" fileName:@"" mimeType:@"image/png"];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            [formData appendPartWithFileData:[NSData data] name:@"uploadPic" fileName:fileName mimeType:@"image/jpg"];
         }else{
             // 上传多张图片
             for(int i=0; i<imageArray.count; i++) {
                 UIImage *image = imageArray[i];
-                NSData *imageData = UIImagePNGRepresentation(image);
-                NSString *fileName = [NSString stringWithFormat:@"evaluationImage%d.png",i];
-                [formData appendPartWithFileData:imageData name:@"imgs" fileName:fileName mimeType:@"image/png"];
+                NSData *imageData = UIImageJPEGRepresentation(image,1);
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                formatter.dateFormat = @"yyyyMMddHHmmss";
+                NSString *str = [formatter stringFromDate:[NSDate date]];
+                NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[NSString stringWithFormat:@"%@.jpg", str],i];
+                [formData appendPartWithFileData:imageData name:@"uploadPic" fileName:fileName mimeType:@"image/jpg"];
             }
         }
         
