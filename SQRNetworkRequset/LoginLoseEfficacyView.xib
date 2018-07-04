@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,7 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Thq-gj-hdt">
-                    <rect key="frame" x="38" y="238.5" width="300" height="210"/>
+                    <rect key="frame" x="38" y="228.5" width="300" height="210"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提 示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUH-1r-ulh">
                             <rect key="frame" x="133" y="10" width="35" height="20"/>
@@ -101,11 +100,10 @@
             </subviews>
             <color key="backgroundColor" white="0.93000000000000005" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Thq-gj-hdt" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="LmP-ZJ-7wc"/>
-                <constraint firstItem="Thq-gj-hdt" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="VOj-Fd-Vjm"/>
+                <constraint firstItem="Thq-gj-hdt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LmP-ZJ-7wc"/>
+                <constraint firstItem="Thq-gj-hdt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VOj-Fd-Vjm"/>
                 <constraint firstItem="Thq-gj-hdt" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="pXT-Br-hHe"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="loginBtn" destination="dEv-BE-V67" id="UVp-4a-3sL"/>
                 <outlet property="popView" destination="Thq-gj-hdt" id="86f-zD-Gnu"/>
