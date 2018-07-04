@@ -15,12 +15,12 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - MBProgressHUD (1.1.0)
-  - SQRBaseDefineWithFunction (0.1.6):
-    - SQRBaseDefineWithFunction/MBProgressHUD (= 0.1.6)
-    - SQRBaseDefineWithFunction/Toast (= 0.1.6)
-  - SQRBaseDefineWithFunction/MBProgressHUD (0.1.6):
+  - SQRBaseDefineWithFunction (0.1.8):
+    - SQRBaseDefineWithFunction/MBProgressHUD (= 0.1.8)
+    - SQRBaseDefineWithFunction/Toast (= 0.1.8)
+  - SQRBaseDefineWithFunction/MBProgressHUD (0.1.8):
     - MBProgressHUD
-  - SQRBaseDefineWithFunction/Toast (0.1.6):
+  - SQRBaseDefineWithFunction/Toast (0.1.8):
     - Toast
   - Toast (4.0.0)
   - YYCache (1.0.4)
@@ -43,13 +43,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SQRBaseDefineWithFunction:
-    :commit: d856903891cb079af4fb555626398bbb88382c36
+    :commit: d064783587321e306453cd8c85ab1a61629696e7
     :git: https://github.com/pengruiCode/SQRBaseDefineWithFunction.git
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  SQRBaseDefineWithFunction: f1cdd6a3544bf5f567976040351bf7d680e1bafc
+  SQRBaseDefineWithFunction: 7489f9a2d967f248d902b78d8d5422bea6f4de0c
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 

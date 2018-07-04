@@ -155,6 +155,8 @@ hud.labelText = @"  加载中...  ";  \
 
 //在java接口请求失败的时候快速处理错误提示
 #define DEF_JAVAERROR_TOAST(error,task,showText)\
+DEF_HidenSystemNetworkActivityIndicator;\
+DEF_HiddenMBHUD;\
 if (task) {\
     NSHTTPURLResponse * responses = (NSHTTPURLResponse *)task.response;\
     if (responses.statusCode == 404 || responses.statusCode == 500) {\

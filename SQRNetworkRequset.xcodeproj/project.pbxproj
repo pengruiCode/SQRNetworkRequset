@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		16E1713D7A63581FFA24A0FE /* libPods-SQRNetworkRequset.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A9A5F5B8CA03F713ABE208C /* libPods-SQRNetworkRequset.a */; };
+		9A1AC7E620ECA4B600482B2B /* LoginLoseEfficacyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC7E520ECA4B600482B2B /* LoginLoseEfficacyView.m */; };
+		9A1AC7E820ECA4CB00482B2B /* LoginLoseEfficacyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC7E720ECA4CB00482B2B /* LoginLoseEfficacyView.xib */; };
 		9A2D66A720CE101A00C986E3 /* SQRNetworkRequsetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66A620CE101A00C986E3 /* SQRNetworkRequsetTests.m */; };
 		9A2D66B220CE101A00C986E3 /* SQRNetworkRequsetUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66B120CE101A00C986E3 /* SQRNetworkRequsetUITests.m */; };
 		9A2D66CF20CE109C00C986E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2D66C420CE109C00C986E3 /* AppDelegate.m */; };
@@ -41,6 +43,9 @@
 /* Begin PBXFileReference section */
 		052D2D0ADA7D66B2A017A647 /* Pods-SQRNetworkRequset.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SQRNetworkRequset.release.xcconfig"; path = "Pods/Target Support Files/Pods-SQRNetworkRequset/Pods-SQRNetworkRequset.release.xcconfig"; sourceTree = "<group>"; };
 		1D036C39827FF1D41F5F054C /* Pods-SQRNetworkRequset.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SQRNetworkRequset.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SQRNetworkRequset/Pods-SQRNetworkRequset.debug.xcconfig"; sourceTree = "<group>"; };
+		9A1AC7E420ECA4B600482B2B /* LoginLoseEfficacyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginLoseEfficacyView.h; sourceTree = "<group>"; };
+		9A1AC7E520ECA4B600482B2B /* LoginLoseEfficacyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginLoseEfficacyView.m; sourceTree = "<group>"; };
+		9A1AC7E720ECA4CB00482B2B /* LoginLoseEfficacyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginLoseEfficacyView.xib; sourceTree = "<group>"; };
 		9A2D668A20CE101700C986E3 /* SQRNetworkRequset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQRNetworkRequset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2D66A220CE101A00C986E3 /* SQRNetworkRequsetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SQRNetworkRequsetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2D66A620CE101A00C986E3 /* SQRNetworkRequsetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQRNetworkRequsetTests.m; sourceTree = "<group>"; };
@@ -154,6 +159,9 @@
 				9A2D66D820CE10A900C986E3 /* SQRNetworkRequest.m */,
 				9A71D07D20E4B55E00E53BC8 /* HMFJSONResponseSerializerWithData.h */,
 				9A71D07C20E4B55C00E53BC8 /* HMFJSONResponseSerializerWithData.m */,
+				9A1AC7E420ECA4B600482B2B /* LoginLoseEfficacyView.h */,
+				9A1AC7E520ECA4B600482B2B /* LoginLoseEfficacyView.m */,
+				9A1AC7E720ECA4CB00482B2B /* LoginLoseEfficacyView.xib */,
 			);
 			path = SQRNetworkRequset;
 			sourceTree = SOURCE_ROOT;
@@ -283,6 +291,7 @@
 				9A2D66D220CE109C00C986E3 /* Main.storyboard in Resources */,
 				9A2D66D020CE109C00C986E3 /* Assets.xcassets in Resources */,
 				9A2D66D120CE109C00C986E3 /* LaunchScreen.storyboard in Resources */,
+				9A1AC7E820ECA4CB00482B2B /* LoginLoseEfficacyView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +342,7 @@
 				9A71D07E20E4B55F00E53BC8 /* HMFJSONResponseSerializerWithData.m in Sources */,
 				9A2D66D520CE109C00C986E3 /* ViewController.m in Sources */,
 				9A2D66D920CE10A900C986E3 /* SQRNetworkRequest.m in Sources */,
+				9A1AC7E620ECA4B600482B2B /* LoginLoseEfficacyView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

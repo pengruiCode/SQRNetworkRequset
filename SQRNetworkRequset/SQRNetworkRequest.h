@@ -43,6 +43,16 @@ typedef void (^NetResponseCache)(id responseObject);                            
  */
 @property (nonatomic, assign) AFNetworkReachabilityStatus AFNetWorkStatus;
 
+/**
+ *  Java接口刷新token接口地址
+ */
+@property (nonatomic, copy) NSString *tokenRefreshUrl;
+
+/**
+ *  登录页面实例化对象
+ */
+@property (nonatomic, copy) UIViewController *loginVc;
+
 
 /**
  发起网络请求

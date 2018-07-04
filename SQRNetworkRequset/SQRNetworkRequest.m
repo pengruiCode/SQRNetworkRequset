@@ -8,6 +8,7 @@
 
 #import "SQRNetworkRequest.h"
 #import "YYCache.h"
+#import "LoginLoseEfficacyView.h"
 #import "HMFJSONResponseSerializerWithData.h"
 #import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
 #import <SQRBaseDefineWithFunction/SQRDataSave.h>
@@ -240,7 +241,7 @@ static AFNetworkReachabilityStatus  networkStatus;
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
+                [self requestDisposeUrl:urlString parameters:parameters type:type isPhp:isPhp cachePolicy:policy success:success cache:cache failure:fail error:error task:task];
                 
             }];
         }
@@ -255,7 +256,7 @@ static AFNetworkReachabilityStatus  networkStatus;
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
+                [self requestDisposeUrl:urlString parameters:parameters type:type isPhp:isPhp cachePolicy:policy success:success cache:cache failure:fail error:error task:task];
                 
             }];
         }
@@ -268,7 +269,7 @@ static AFNetworkReachabilityStatus  networkStatus;
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
+                [self requestDisposeUrl:urlString parameters:parameters type:type isPhp:isPhp cachePolicy:policy success:success cache:cache failure:fail error:error task:task];
                 
             }];
         }
@@ -281,7 +282,7 @@ static AFNetworkReachabilityStatus  networkStatus;
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
+                [self requestDisposeUrl:urlString parameters:parameters type:type isPhp:isPhp cachePolicy:policy success:success cache:cache failure:fail error:error task:task];
                 
             }];
         }
@@ -294,7 +295,7 @@ static AFNetworkReachabilityStatus  networkStatus;
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
-                REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task);
+                [self requestDisposeUrl:urlString parameters:parameters type:type isPhp:isPhp cachePolicy:policy success:success cache:cache failure:fail error:error task:task];
                 
             }];
         }
@@ -304,6 +305,73 @@ static AFNetworkReachabilityStatus  networkStatus;
             break;
     }
 }
+
+
+//错误处理
+- (void)requestDisposeUrl:(NSString *)url
+               parameters:(id)parameters
+                     type:(NetworkMethod)type
+                    isPhp:(BOOL)isPhp
+              cachePolicy:(RequestCachePolicy)policy
+                  success:(NetRequestSuccessBlock)success
+                    cache:(NetResponseCache)cache
+                  failure:(NetRequestFailedBlock)fail
+                    error:(NSError * _Nonnull)error
+                     task:(NSURLSessionDataTask * _Nullable)task {
+    
+    if (fail)fail(error,task);
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    NSHTTPURLResponse * responses = (NSHTTPURLResponse *)task.response;
+    NSLog(@"失败返回 --- URL ： %@ \n ---错误码 = %ld  \n ---详细信息 : %@",url,responses.statusCode,error);
+    
+    //针对Java接口token失效401的处理，刷新token重新请求
+    if (responses.statusCode == 401 && !isPhp) {
+        NSString *token = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil];
+        if (token.length > 0) {
+            NSString *refreshToken = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil];
+            if (self.tokenRefreshUrl.length > 0 && refreshToken.length > 0) {
+                [self postWithUrl:self.tokenRefreshUrl
+                       parameters:@{@"refresh_token":[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token_Refresh customKey:nil]}
+                          success:^(id responseObject) {
+                              NSDictionary *dictObj;
+                              if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                                  dictObj = responseObject;
+                              }else{
+                                  NSString *responseJson = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+                                  dictObj = [SQRCommonFunction JsonToDictionary:responseJson];
+                              }
+                              
+                              if ([dictObj.allKeys containsObject:@"access_token"]) {
+                                  [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"access_token"] dataEnum:SaveDataEnum_Token customKey:nil];
+                              }
+                              if ([dictObj.allKeys containsObject:@"refresh_token"]) {
+                                  [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"refresh_token"] dataEnum:SaveDataEnum_Token_Refresh customKey:nil];
+                              }
+                              
+                              [self requestWithUrl:url parameters:parameters type:type isPhp:NO cachePolicy:policy success:success cache:cache failure:fail];
+                          }
+                             fail:^(NSError *error, NSURLSessionDataTask *task) {
+                                 
+                             }];
+            }
+            
+        }else{
+            //未登录状态去登陆
+            [[LoginLoseEfficacyView sharedInstance] showInView:DEF_Window];
+            [[LoginLoseEfficacyView sharedInstance] setPushLoginBlcok:^{
+                if (self.loginVc) {
+                    [[SQRCommonFunction topViewController] presentViewController:self.loginVc animated:YES completion:nil];
+                }else{
+                    [[LoginLoseEfficacyView sharedInstance] hide];
+                }
+            }];
+        }
+        return;
+    }
+}
+
+
+
 
 - (void)getWithUrl:(NSString *)urlString
         parameters:(id)parameters

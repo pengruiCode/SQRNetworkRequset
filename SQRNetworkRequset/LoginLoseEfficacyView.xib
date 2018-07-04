@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoginLoseEfficacyView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Thq-gj-hdt">
+                    <rect key="frame" x="38" y="238.5" width="300" height="210"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提 示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUH-1r-ulh">
+                            <rect key="frame" x="133" y="10" width="35" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="Mgt-Xb-AjB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.95686274510000002" green="0.1836588542" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gop-Iw-aeY">
+                            <rect key="frame" x="15" y="165" width="270" height="35"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="EPQ-hB-l1R"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="hide" destination="iN0-l3-epB" eventType="touchUpInside" id="QXl-4R-KhB"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEv-BE-V67">
+                            <rect key="frame" x="15" y="120" width="270" height="35"/>
+                            <color key="backgroundColor" red="0.95686274510000002" green="0.1836588542" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="6pD-yh-hWG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="去登录">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="pushLogin" destination="iN0-l3-epB" eventType="touchUpInside" id="muj-oh-r8x"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还未登录或登录已失效，请登录后再继续操作" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f57-Ey-B9B">
+                            <rect key="frame" x="15" y="40" width="270" height="70"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="zUH-1r-ulh" firstAttribute="centerX" secondItem="Thq-gj-hdt" secondAttribute="centerX" id="1s8-YY-tVq"/>
+                        <constraint firstAttribute="width" secondItem="Thq-gj-hdt" secondAttribute="height" multiplier="1:0.7" id="7hr-9T-GZp"/>
+                        <constraint firstItem="f57-Ey-B9B" firstAttribute="top" secondItem="zUH-1r-ulh" secondAttribute="bottom" constant="10" id="Eli-TE-MnN"/>
+                        <constraint firstItem="dEv-BE-V67" firstAttribute="height" secondItem="gop-Iw-aeY" secondAttribute="height" id="FRw-8h-JEj"/>
+                        <constraint firstItem="dEv-BE-V67" firstAttribute="centerX" secondItem="gop-Iw-aeY" secondAttribute="centerX" id="FqJ-0M-DbK"/>
+                        <constraint firstAttribute="bottom" secondItem="gop-Iw-aeY" secondAttribute="bottom" constant="10" id="MBr-9s-hEJ"/>
+                        <constraint firstItem="gop-Iw-aeY" firstAttribute="centerX" secondItem="Thq-gj-hdt" secondAttribute="centerX" id="RHD-pb-KcY"/>
+                        <constraint firstItem="f57-Ey-B9B" firstAttribute="centerX" secondItem="Thq-gj-hdt" secondAttribute="centerX" id="S8f-5q-IfE"/>
+                        <constraint firstItem="dEv-BE-V67" firstAttribute="top" secondItem="f57-Ey-B9B" secondAttribute="bottom" constant="10" id="STK-QN-aGf"/>
+                        <constraint firstItem="gop-Iw-aeY" firstAttribute="top" secondItem="dEv-BE-V67" secondAttribute="bottom" constant="10" id="lhd-So-Zmf"/>
+                        <constraint firstItem="gop-Iw-aeY" firstAttribute="width" secondItem="Thq-gj-hdt" secondAttribute="width" multiplier="0.9" id="ntS-ya-t01"/>
+                        <constraint firstItem="f57-Ey-B9B" firstAttribute="width" secondItem="dEv-BE-V67" secondAttribute="width" id="wgR-Sb-NmS"/>
+                        <constraint firstItem="zUH-1r-ulh" firstAttribute="top" secondItem="Thq-gj-hdt" secondAttribute="top" constant="10" id="xxG-yZ-EJu"/>
+                        <constraint firstItem="dEv-BE-V67" firstAttribute="width" secondItem="gop-Iw-aeY" secondAttribute="width" id="yB2-Dh-YE6"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.93000000000000005" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Thq-gj-hdt" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="LmP-ZJ-7wc"/>
+                <constraint firstItem="Thq-gj-hdt" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="VOj-Fd-Vjm"/>
+                <constraint firstItem="Thq-gj-hdt" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="pXT-Br-hHe"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="loginBtn" destination="dEv-BE-V67" id="UVp-4a-3sL"/>
+                <outlet property="popView" destination="Thq-gj-hdt" id="86f-zD-Gnu"/>
+                <outlet property="titleLb" destination="zUH-1r-ulh" id="qbu-jB-3yW"/>
+            </connections>
+        </view>
+    </objects>
+</document>

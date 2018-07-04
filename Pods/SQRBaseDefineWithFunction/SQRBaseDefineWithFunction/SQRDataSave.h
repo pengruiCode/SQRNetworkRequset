@@ -15,6 +15,8 @@ typedef NS_ENUM(NSUInteger, SaveDataNameEnum) {
     SaveDataEnum_Session,
     //用户标识(java)
     SaveDataEnum_Token,
+    //用来向后台刷新用户标识
+    SaveDataEnum_Token_Refresh,
     //用户ID
     SaveDataEnum_UserId,
     //用户昵称

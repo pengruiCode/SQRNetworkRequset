@@ -6,7 +6,6 @@ def pods
 
 pod 'AFNetworking'
 pod 'YYCache'
-
 pod 'SQRBaseDefineWithFunction',    :git => 'https://github.com/pengruiCode/SQRBaseDefineWithFunction.git'
 
 end

@@ -1,6 +1,6 @@
 {
   "name": "SQRBaseDefineWithFunction",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "summary": "通用组件",
   "homepage": "https://github.com/pengruiCode/SQRBaseDefineWithFunction.git",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/pengruiCode/SQRBaseDefineWithFunction.git",
-    "tag": "0.1.6"
+    "tag": "0.1.8"
   },
   "platforms": {
     "ios": "8.0"
