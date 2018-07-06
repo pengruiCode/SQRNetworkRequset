@@ -51,7 +51,7 @@ typedef void (^NetResponseCache)(id responseObject);                            
 /**
  *  登录页面实例化对象
  */
-@property (nonatomic, copy) UIViewController *loginVc;
+@property (nonatomic, strong) UIViewController *loginVc;
 
 
 /**
