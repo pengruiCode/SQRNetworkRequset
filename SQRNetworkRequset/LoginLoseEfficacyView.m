@@ -26,8 +26,9 @@
         self = [[NSBundle mainBundle]loadNibNamed:@"LoginLoseEfficacyView" owner:nil options:nil].firstObject;
         [self setFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREENH_HEIGHT)];
         if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil]) {
-            [_loginBtn setBackgroundColor:[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil]];
-            _titleLb.textColor = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil];
+            NSNumber *num = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil];
+            [_loginBtn setBackgroundColor:DEF_HEXColor(num.intValue)];
+            _titleLb.textColor = DEF_HEXColor(num.intValue);
         }
     }
     return self;

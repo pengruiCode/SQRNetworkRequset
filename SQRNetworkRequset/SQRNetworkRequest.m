@@ -56,6 +56,9 @@ static AFNetworkReachabilityStatus  networkStatus;
 
 @interface SQRNetworkRequest ()
 
+//记录401的接口，用作刷新token之后比对，按需刷新
+@property(nonatomic,strong) NSString *refreshAgainUrl;
+
 @end
 
 @implementation SQRNetworkRequest
@@ -326,13 +329,18 @@ static AFNetworkReachabilityStatus  networkStatus;
     
     //针对Java接口token失效401的处理，刷新token重新请求
     if (responses.statusCode == 401 && !isPhp) {
+        
         NSString *token = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil];
+        
         if (token.length > 0) {
-            NSString *refreshToken = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil];
+            
+            NSString *refreshToken = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token_Refresh customKey:nil];
             if (self.tokenRefreshUrl.length > 0 && refreshToken.length > 0) {
+                
                 [self postWithUrl:self.tokenRefreshUrl
                        parameters:@{@"refresh_token":[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token_Refresh customKey:nil]}
                           success:^(id responseObject) {
+                              
                               NSDictionary *dictObj;
                               if ([responseObject isKindOfClass:[NSDictionary class]]) {
                                   dictObj = responseObject;
@@ -343,12 +351,18 @@ static AFNetworkReachabilityStatus  networkStatus;
                               
                               if ([dictObj.allKeys containsObject:@"access_token"]) {
                                   [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"access_token"] dataEnum:SaveDataEnum_Token customKey:nil];
+                                  
+                                  if(self.refreshAgainUrl != url) {
+                                      self.refreshAgainUrl = url;
+                                      [self requestWithUrl:url parameters:parameters type:type isPhp:NO cachePolicy:policy success:success cache:cache failure:fail];
+                                  }else{
+                                      NSLog(@"--- token已刷新，接口：%@再次请求结果还是401",url);
+                                  }
                               }
+                              
                               if ([dictObj.allKeys containsObject:@"refresh_token"]) {
                                   [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"refresh_token"] dataEnum:SaveDataEnum_Token_Refresh customKey:nil];
                               }
-                              
-                              [self requestWithUrl:url parameters:parameters type:type isPhp:NO cachePolicy:policy success:success cache:cache failure:fail];
                           }
                              fail:^(NSError *error, NSURLSessionDataTask *task) {
                                  
@@ -360,7 +374,13 @@ static AFNetworkReachabilityStatus  networkStatus;
             [[LoginLoseEfficacyView sharedInstance] showInView:DEF_Window];
             [[LoginLoseEfficacyView sharedInstance] setPushLoginBlcok:^{
                 if (self.loginVc) {
-                    [[SQRCommonFunction topViewController] presentViewController:self.loginVc animated:YES completion:nil];
+                    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.loginVc];
+                    NSNumber *num = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil];
+                    nav.navigationBar.barTintColor = num ? DEF_HEXColor(num.intValue) : [UIColor lightGrayColor];
+                    nav.navigationBar.tintColor = [UIColor whiteColor];
+                    [[SQRCommonFunction topViewController] presentViewController:nav animated:YES completion:^{
+                        [[UIApplication sharedApplication].keyWindow.rootViewController removeFromParentViewController];
+                    }];
                 }else{
                     [[LoginLoseEfficacyView sharedInstance] hide];
                 }
