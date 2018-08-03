@@ -371,20 +371,7 @@ static AFNetworkReachabilityStatus  networkStatus;
             
         }else{
             //未登录状态去登陆
-            [[LoginLoseEfficacyView sharedInstance] showInView:DEF_Window];
-            [[LoginLoseEfficacyView sharedInstance] setPushLoginBlcok:^{
-                if (self.loginVc) {
-                    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.loginVc];
-                    NSNumber *num = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil];
-                    nav.navigationBar.barTintColor = num ? DEF_HEXColor(num.intValue) : [UIColor lightGrayColor];
-                    nav.navigationBar.tintColor = [UIColor whiteColor];
-                    [[SQRCommonFunction topViewController] presentViewController:nav animated:YES completion:^{
-                        [[UIApplication sharedApplication].keyWindow.rootViewController removeFromParentViewController];
-                    }];
-                }else{
-                    [[LoginLoseEfficacyView sharedInstance] hide];
-                }
-            }];
+            [[LoginLoseEfficacyView sharedInstance] show];
         }
         return;
     }

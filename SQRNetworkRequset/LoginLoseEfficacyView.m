@@ -7,7 +7,9 @@
 //
 
 #import "LoginLoseEfficacyView.h"
+#import "SQRNetworkRequest.h"
 #import <SQRBaseDefineWithFunction/SQRBaseDefine.h>
+#import <SQRBaseDefineWithFunction/SQRDataSave.h>
 
 @implementation LoginLoseEfficacyView
 
@@ -36,15 +38,23 @@
 
 
 - (IBAction)pushLogin {
-    if (self.pushLoginBlcok) {
-        self.pushLoginBlcok();
+    [self hide];
+    if ([SQRNetworkRequest sharedInstance].loginVc) {
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[SQRNetworkRequest sharedInstance].loginVc];
+        NSNumber *num = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil];
+        nav.navigationBar.barTintColor = num ? DEF_HEXColor(num.intValue) : [UIColor lightGrayColor];
+        nav.navigationBar.tintColor = [UIColor whiteColor];
+        nav.navigationItem.title = @"登录";
+        [[SQRCommonFunction topViewController] presentViewController:nav animated:YES completion:^{
+            [[UIApplication sharedApplication].keyWindow.rootViewController removeFromParentViewController];
+        }];
     }
 }
 
 
-- (void)showInView:(UIView *)view {
+- (void)show {
     if (!self.isShow) {
-        [view addSubview:self];
+        [DEF_Window addSubview:self];
         self.backgroundColor = [UIColor clearColor];
         self.isShow = YES;
         [_popView.layer setValue:@(0) forKeyPath:@"transform.scale"];

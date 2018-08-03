@@ -18,7 +18,7 @@
 
 + (LoginLoseEfficacyView *)sharedInstance;
 
-- (void)showInView:(UIView *)view;
+- (void)show;
 
 - (IBAction)hide;
 
