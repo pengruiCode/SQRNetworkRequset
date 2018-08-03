@@ -59,7 +59,7 @@
 //                                                      } fail:^(NSError *error,NSURLSessionDataTask *task) {
 //
 //                                                      }];
-    [[LoginLoseEfficacyView sharedInstance] showInView:DEF_Window];
+    [[LoginLoseEfficacyView sharedInstance] show];
 }
 
 - (IBAction)javaRequest:(id)sender {

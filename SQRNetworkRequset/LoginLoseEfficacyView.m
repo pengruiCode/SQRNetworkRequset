@@ -53,6 +53,13 @@
 
 
 - (void)show {
+    
+    if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil]) {
+        NSNumber *num = [SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_MasterColor customKey:nil];
+        [_loginBtn setBackgroundColor:DEF_HEXColor(num.intValue)];
+        _titleLb.textColor = DEF_HEXColor(num.intValue);
+    }
+    
     if (!self.isShow) {
         [DEF_Window addSubview:self];
         self.backgroundColor = [UIColor clearColor];
