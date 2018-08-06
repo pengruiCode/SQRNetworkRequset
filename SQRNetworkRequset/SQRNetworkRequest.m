@@ -29,6 +29,8 @@ if ([responseObject isKindOfClass:[NSDictionary class]]) {\
     if (success)success(dictObj);\
     NSLog(@"成功返回 --- URL ： %@ \n %@",urlString,dictObj);\
 }\
+DEF_HidenSystemNetworkActivityIndicator;\
+DEF_HiddenMBHUD;\
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
 
 
@@ -47,6 +49,8 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
 //请求失败打印错误原因并返回
 #define REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task)\
 if (fail)fail(error,task);\
+DEF_HidenSystemNetworkActivityIndicator;\
+DEF_HiddenMBHUD;\
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
 NSHTTPURLResponse * responses = (NSHTTPURLResponse *)task.response;\
 NSLog(@"失败返回 --- URL ： %@ \n ---错误码 = %ld  \n ---详细信息 : %@",urlString,responses.statusCode,error);
