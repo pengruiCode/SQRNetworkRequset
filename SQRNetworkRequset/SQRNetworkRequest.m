@@ -21,37 +21,35 @@
 \
 NSDictionary *dictObj;\
 if ([responseObject isKindOfClass:[NSDictionary class]]) {\
-    if (success)success(responseObject);\
-    NSLog(@"成功返回 --- URL ： %@ \n %@",urlString,responseObject);\
+if (success)success(responseObject);\
+NSLog(@"成功返回 --- URL ： %@ \n %@",urlString,responseObject);\
 }else{\
-    NSString *responseJson = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];\
-    dictObj = [SQRCommonFunction JsonToDictionary:responseJson];\
-    if (success)success(dictObj);\
-    NSLog(@"成功返回 --- URL ： %@ \n %@",urlString,dictObj);\
+NSString *responseJson = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];\
+dictObj = [SQRCommonFunction JsonToDictionary:responseJson];\
+if (success)success(dictObj);\
+NSLog(@"成功返回 --- URL ： %@ \n %@",urlString,dictObj);\
 }\
-DEF_HidenSystemNetworkActivityIndicator;\
-DEF_HiddenMBHUD;\
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
+[MBProgressHUD hideAllHUDsForView:DEF_Window animated:YES];\
 
 
 //请求成功判断缓存方式并缓存
 #define SAVECACHEWITH_CACHEWAY_MYCHAHE_KEY(cacheWay,myCache,cacheKey)\
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{\
-    if (cacheWay != IgnoringLocalCacheData) {\
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {\
-            [myCache setObject:responseObject forKey:cacheKey];\
-        }else{\
-            [myCache setObject:dictObj forKey:cacheKey];\
-        }\
-    }\
+if (cacheWay != IgnoringLocalCacheData) {\
+if ([responseObject isKindOfClass:[NSDictionary class]]) {\
+[myCache setObject:responseObject forKey:cacheKey];\
+}else{\
+[myCache setObject:dictObj forKey:cacheKey];\
+}\
+}\
 });
 
 //请求失败打印错误原因并返回
 #define REQUEST_FAILURE_BLCOK_ERROR_TASK(fail,error,task)\
 if (fail)fail(error,task);\
-DEF_HidenSystemNetworkActivityIndicator;\
-DEF_HiddenMBHUD;\
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];\
+[MBProgressHUD hideAllHUDsForView:DEF_Window animated:YES];\
 NSHTTPURLResponse * responses = (NSHTTPURLResponse *)task.response;\
 NSLog(@"失败返回 --- URL ： %@ \n ---错误码 = %ld  \n ---详细信息 : %@",urlString,responses.statusCode,error);
 
@@ -167,6 +165,11 @@ static AFNetworkReachabilityStatus  networkStatus;
                  cache:(NetResponseCache)cache
                failure:(NetRequestFailedBlock)fail
 {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [MBProgressHUD hideAllHUDsForView:DEF_Window animated:YES];
+    });
+    
     AFHTTPSessionManager *manager = [self sharedManager];
     
     //判断接口类型，处理不同设置
