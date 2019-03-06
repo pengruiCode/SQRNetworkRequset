@@ -1,7 +1,7 @@
 //
 //  SQRNetworkRequest.h
 //  SQRCommonToolsProject
-//  
+//
 //  Created by macMini on 2018/5/30.
 //  Copyright © 2018年 PR. All rights reserved.
 //
@@ -53,6 +53,12 @@ typedef void (^NetResponseCache)(id responseObject);                            
  */
 @property (nonatomic, strong) UIViewController *loginVc;
 
+/**
+ 删除缓存
+ @param url
+ @param params 参数
+ */
+- (void)removeCacheForUrl:(NSString *)url params:(id)params;
 
 /**
  发起网络请求

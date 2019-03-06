@@ -156,6 +156,15 @@ static AFNetworkReachabilityStatus  networkStatus;
 
 
 
+- (void)removeCacheForUrl:(NSString *)url params:(id)params{
+    //缓存，用url拼接参数作为key
+    YYCache *myCache = [YYCache cacheWithName:@"SQRCache"];
+    NSString *parString = params ? [self dictionaryToJson:params] : @"";
+    NSString *cacheKey = [NSString stringWithFormat:@"%@%@", url, parString];
+    [myCache removeObjectForKey:cacheKey];
+}
+
+
 - (void)requestWithUrl:(NSString *)urlString
             parameters:(id)parameters
                   type:(NetworkMethod)type
@@ -185,6 +194,7 @@ static AFNetworkReachabilityStatus  networkStatus;
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [HMFJSONResponseSerializerWithData serializer];
         if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]) {
+            NSLog(@"token = %@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]);
             [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer%@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]] forHTTPHeaderField:@"Authorization"];
         }
     }
@@ -357,18 +367,34 @@ static AFNetworkReachabilityStatus  networkStatus;
                               }
                               
                               if ([dictObj.allKeys containsObject:@"access_token"]) {
-                                  [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"access_token"] dataEnum:SaveDataEnum_Token customKey:nil];
-                                  
-                                  if(self.refreshAgainUrl != url) {
-                                      self.refreshAgainUrl = url;
-                                      [self requestWithUrl:url parameters:parameters type:type isPhp:NO cachePolicy:policy success:success cache:cache failure:fail];
+                                  NSString *access_token = dictObj[@"access_token"];
+                                  if (access_token.length > 0) {
+                                      [SQRDataSave saveDataInUserDefaultsWithData:access_token dataEnum:SaveDataEnum_Token customKey:nil];
+                                      
+                                      if(self.refreshAgainUrl != url) {
+                                          self.refreshAgainUrl = url;
+                                          [self requestWithUrl:url parameters:parameters type:type isPhp:NO cachePolicy:policy success:success cache:cache failure:fail];
+                                      }else{
+                                          NSLog(@"--- token已刷新，接口：%@再次请求结果还是401",url);
+                                      }
                                   }else{
-                                      NSLog(@"--- token已刷新，接口：%@再次请求结果还是401",url);
+                                      [[LoginLoseEfficacyView sharedInstance] show];
                                   }
+                                  
+                              }else{
+                                  [[LoginLoseEfficacyView sharedInstance] show];
                               }
                               
                               if ([dictObj.allKeys containsObject:@"refresh_token"]) {
-                                  [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"refresh_token"] dataEnum:SaveDataEnum_Token_Refresh customKey:nil];
+                                  NSString *refresh_token = dictObj[@"refresh_token"];
+                                  if (refresh_token.length > 0) {
+                                      [SQRDataSave saveDataInUserDefaultsWithData:dictObj[@"refresh_token"] dataEnum:SaveDataEnum_Token_Refresh customKey:nil];
+                                  }else{
+                                      [[LoginLoseEfficacyView sharedInstance] show];
+                                  }
+                                  
+                              }else{
+                                  [[LoginLoseEfficacyView sharedInstance] show];
                               }
                           }
                              fail:^(NSError *error, NSURLSessionDataTask *task) {
@@ -414,35 +440,35 @@ static AFNetworkReachabilityStatus  networkStatus;
 
 
 - (void)deleteWithUrl:(NSString *)urlString
-         parameters:(id)parameters
-            success:(NetRequestSuccessBlock)success
-               fail:(NetRequestFailedBlock)fail
+           parameters:(id)parameters
+              success:(NetRequestSuccessBlock)success
+                 fail:(NetRequestFailedBlock)fail
 {
     [self requestWithUrl:urlString parameters:parameters type:DELETE isPhp:NO cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
 }
 
 - (void)patchWithUrl:(NSString *)urlString
-           parameters:(id)parameters
-              success:(NetRequestSuccessBlock)success
-                 fail:(NetRequestFailedBlock)fail
+          parameters:(id)parameters
+             success:(NetRequestSuccessBlock)success
+                fail:(NetRequestFailedBlock)fail
 {
     [self requestWithUrl:urlString parameters:parameters type:PATCH isPhp:NO cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
 }
 
 //PHP专用
 - (void)getPhpWithUrl:(NSString *)urlString
-        parameters:(id)parameters
-           success:(NetRequestSuccessBlock)success
-              fail:(NetRequestFailedBlock)fail
+           parameters:(id)parameters
+              success:(NetRequestSuccessBlock)success
+                 fail:(NetRequestFailedBlock)fail
 {
     [self requestWithUrl:urlString parameters:parameters type:GET isPhp:YES cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
 }
 
 //PHP专用
 - (void)postPhpWithUrl:(NSString *)urlString
-         parameters:(id)parameters
-            success:(NetRequestSuccessBlock)success
-               fail:(NetRequestFailedBlock)fail
+            parameters:(id)parameters
+               success:(NetRequestSuccessBlock)success
+                  fail:(NetRequestFailedBlock)fail
 {
     [self requestWithUrl:urlString parameters:parameters type:POST isPhp:YES cachePolicy:IgnoringLocalCacheData success:success cache:nil failure:fail];
 }
@@ -514,7 +540,7 @@ static AFNetworkReachabilityStatus  networkStatus;
                 formatter.dateFormat = @"yyyyMMddHHmmss";
                 NSString *str = [formatter stringFromDate:[NSDate date]];
                 NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[NSString stringWithFormat:@"%@.jpg", str],i];
-                [formData appendPartWithFileData:imageData name:@"uploadPic" fileName:fileName mimeType:@"image/jpg"];
+                [formData appendPartWithFileData:imageData name:@"uploadIcon" fileName:fileName mimeType:@"image/jpg"];
             }
         }
         
@@ -554,8 +580,14 @@ static AFNetworkReachabilityStatus  networkStatus;
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+        formatter.dateFormat=@"yyyyMMddHHmmss";
+        NSString *str=[formatter stringFromDate:[NSDate date]];
+        NSString *fileName=[NSString stringWithFormat:@"%@.jpg",str];
+        
         NSData *imageData = UIImagePNGRepresentation(image);
-        [formData appendPartWithFileData:imageData name:@"file" fileName:@"tmp.png" mimeType:@"multipart/form-data"];
+        [formData appendPartWithFileData:imageData name:@"uploadIcon" fileName:fileName mimeType:@"image/jpg"];
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -619,3 +651,4 @@ static AFNetworkReachabilityStatus  networkStatus;
 
 
 @end
+
