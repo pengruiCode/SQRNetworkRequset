@@ -196,9 +196,11 @@ static AFNetworkReachabilityStatus  networkStatus;
         if ([SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]) {
             NSLog(@"token = %@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]);
             [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer%@",[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token customKey:nil]] forHTTPHeaderField:@"Authorization"];
+            [manager.requestSerializer setValue:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] forHTTPHeaderField:@"appVersion"];
+            [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"system"];
+            [manager.requestSerializer setValue:@"社区人用户端" forHTTPHeaderField:@"app"];
         }
     }
-    
     
     if (networkStatus == AFNetworkReachabilityStatusNotReachable) {
         if (fail)fail(NOT_NETWORK_ERROR,nil);
@@ -355,7 +357,7 @@ static AFNetworkReachabilityStatus  networkStatus;
             if (self.tokenRefreshUrl.length > 0 && refreshToken.length > 0) {
                 
                 [self postWithUrl:self.tokenRefreshUrl
-                       parameters:@{@"refresh_token":[SQRDataSave takeOutDataFromDataEnum:SaveDataEnum_Token_Refresh customKey:nil]}
+                       parameters:@{@"refresh_token":refreshToken}
                           success:^(id responseObject) {
                               
                               NSDictionary *dictObj;
@@ -382,7 +384,11 @@ static AFNetworkReachabilityStatus  networkStatus;
                                   }
                                   
                               }else{
-                                  [[LoginLoseEfficacyView sharedInstance] show];
+                                  if ([dictObj.allKeys containsObject:@"msg"]) {
+                                      if ([dictObj[@"msg"] isEqualToString:@"error=invalid_grant"]) {
+                                          [[LoginLoseEfficacyView sharedInstance] show];
+                                      }
+                                  }
                               }
                               
                               if ([dictObj.allKeys containsObject:@"refresh_token"]) {
@@ -392,14 +398,13 @@ static AFNetworkReachabilityStatus  networkStatus;
                                   }else{
                                       [[LoginLoseEfficacyView sharedInstance] show];
                                   }
-                                  
-                              }else{
-                                  [[LoginLoseEfficacyView sharedInstance] show];
                               }
                           }
                              fail:^(NSError *error, NSURLSessionDataTask *task) {
                                  
                              }];
+            }else{
+                [[LoginLoseEfficacyView sharedInstance] show];
             }
             
         }else{
