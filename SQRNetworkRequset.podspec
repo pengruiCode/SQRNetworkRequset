@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SQRNetworkRequset"
-  s.version      = "0.2.1"
+  s.version      = "0.2.2"
   s.summary  	 = '网络请求'
   s.homepage     = "https://github.com/pengruiCode/SQRNetworkRequset.git"
   s.license      = { :type => "MIT", :file => "LICENSE" }

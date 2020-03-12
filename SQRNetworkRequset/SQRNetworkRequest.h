@@ -199,12 +199,14 @@ typedef void (^NetResponseCache)(id responseObject);                            
  *  @param urlString  上传地址
  *  @param image      图片
  *  @param parameters 参数
+ *  @param dataImage 图片名拼接后缀（非必选）
  *  @param success    成功Block
  *  @param fail       失败Block
  */
 - (void)postUploadImageWithUrl:(NSString *)urlString
                          image:(UIImage *)image
                     parameters:(id)parameters
+                     dataImage:(NSString *)dataImage
                       progress:(NetRequestProgressBlock)progress
                        success:(NetRequestSuccessBlock)success
                           fail:(NetRequestFailedBlock)fail;

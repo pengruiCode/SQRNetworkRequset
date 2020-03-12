@@ -569,6 +569,7 @@ static AFNetworkReachabilityStatus  networkStatus;
 - (void)postUploadImageWithUrl:(NSString *)urlString
                          image:(UIImage *)image
                     parameters:(id)parameters
+                     dataImage:(NSString *)dataImage
                       progress:(NetRequestProgressBlock)progress
                        success:(NetRequestSuccessBlock)success
                           fail:(NetRequestFailedBlock)fail
@@ -592,7 +593,7 @@ static AFNetworkReachabilityStatus  networkStatus;
         NSString *fileName=[NSString stringWithFormat:@"%@.jpg",str];
         
         NSData *imageData = UIImagePNGRepresentation(image);
-        [formData appendPartWithFileData:imageData name:@"uploadIcon" fileName:fileName mimeType:@"image/jpg"];
+        [formData appendPartWithFileData:imageData name:dataImage ? dataImage : @"uploadPic" fileName:fileName mimeType:@"image/jpg"];
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
