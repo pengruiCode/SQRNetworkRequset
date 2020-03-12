@@ -6,9 +6,11 @@ def pods
 
 pod 'AFNetworking'
 pod 'YYCache'
-pod 'SQRBaseDefineWithFunction',    :git => 'https://github.com/pengruiCode/SQRBaseDefineWithFunction.git'
+pod 'SQRBaseDefineWithFunction',    :git => 'https://github.com/pengruiCode/SQRBaseDefineWithFunction.git' 
 
 end
+
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'SQRNetworkRequset' do
     pods
